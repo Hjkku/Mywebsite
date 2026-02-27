@@ -1,31 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axstore Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX | Digital Experience</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="gradient-bg"></div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
-    <header>
-        <h1>Welcome to Axstore</h1>
-        <p>Personal website by Hjkku</p>
-    </header>
+    <nav>
+        <div class="logo">AX</div>
+        <div class="nav-links">
+            <a href="#about" class="nav-item">Tentang</a>
+            <a href="#lab" class="nav-item">Lab</a>
+            <a href="#" class="nav-item contact-btn">Kontak</a>
+        </div>
+    </nav>
 
-    <section class="card">
-        <h2>About Me</h2>
-        <p>Website pribadi yang berisi info dan project tentang aku.</p>
-        <button id="btn">Klik Aku</button>
-        <p id="result"></p>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="reveal-text">ARSITEK <span class="outline">DIGITAL</span></h1>
+                <p class="subtitle">Membangun masa depan melalui kode dan estetika hitam-putih.</p>
+                <div class="scroll-indicator"></div>
+            </div>
+        </section>
 
-    <footer>
-        <p>© 2026 Axstore.my.id</p>
-    </footer>
+        <section id="about" class="about">
+            <div class="container">
+                <h2>SIAPA AX?</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>Saya adalah entitas yang percaya bahwa keindahan terletak pada kesederhanaan yang ekstrem. Dominasi hitam bukan sekadar warna, melainkan ruang tanpa batas untuk berinovasi.</p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item"><span>100+</span> Proyek Selesai</div>
+                        <div class="stat-item"><span>01</span> Visi Fokus</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <script src="index.js"></script>
+        <section id="lab" class="lab">
+            <h2>INTERACTIVE LAB</h2>
+            <div class="card-container">
+                <div class="card" data-tilt>
+                    <h3>Kreativitas</h3>
+                    <p>Melampaui batas visual standar.</p>
+                </div>
+                <div class="card" data-tilt>
+                    <h3>Teknologi</h3>
+                    <p>Stack modern, performa tanpa kompromi.</p>
+                </div>
+                <div class="card" data-tilt>
+                    <h3>Strategi</h3>
+                    <p>Setiap piksel memiliki tujuan.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
