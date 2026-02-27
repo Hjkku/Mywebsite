@@ -1,69 +1,133 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AX | Digital Experience</title>
+    <title>AX | Future Vision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;500;900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-[#050505] text-white selection:bg-white selection:text-black overflow-x-hidden">
 
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <div id="cursor"></div>
 
-    <nav>
-        <div class="logo">AX</div>
-        <div class="nav-links">
-            <a href="#about" class="nav-item">Tentang</a>
-            <a href="#lab" class="nav-item">Lab</a>
-            <a href="#" class="nav-item contact-btn">Kontak</a>
+    <nav id="navbar" class="fixed w-full z-[100] transition-all duration-500 py-6 px-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-[5px] font-['Syncopate']">AX</div>
+            
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <button id="theme-toggle" class="p-2 rounded-full border border-white/10 hover:bg-white/10 transition">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#contact" class="bg-white text-black px-6 py-2 rounded-full font-bold hover:scale-105 transition transform active:scale-95">Hire Me</a>
+            </div>
         </div>
     </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="reveal-text">ARSITEK <span class="outline">DIGITAL</span></h1>
-                <p class="subtitle">Membangun masa depan melalui kode dan estetika hitam-putih.</p>
-                <div class="scroll-indicator"></div>
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="mesh-gradient"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4" data-aos="zoom-out" data-aos-duration="1500">
+            <h2 class="text-xl md:text-2xl tracking-[10px] opacity-60 mb-4">HELLO, I AM AX</h2>
+            <h1 class="text-5xl md:text-8xl font-extrabold mb-6 leading-tight">
+                WE BUILD <br> <span id="typing-text" class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500"></span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-gray-400 text-lg mb-10">Menciptakan ekosistem digital yang tidak hanya berfungsi, tapi juga menginspirasi. Presisi adalah identitas kami.</p>
+            
+            <div class="flex flex-col md:flex-row gap-5 justify-center">
+                <button class="btn-gradient px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm">Explore Work</button>
+                <button onclick="toggleModal()" class="border border-white/20 px-8 py-4 rounded-full font-bold hover:bg-white hover:text-black transition duration-500">View CV</button>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h2>SIAPA AX?</h2>
-                <div class="about-grid">
-                    <div class="about-text">
-                        <p>Saya adalah entitas yang percaya bahwa keindahan terletak pada kesederhanaan yang ekstrem. Dominasi hitam bukan sekadar warna, melainkan ruang tanpa batas untuk berinovasi.</p>
+    <section id="about" class="py-24 px-10 relative">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20">
+            <div data-aos="fade-right">
+                <h3 class="text-4xl font-bold mb-8">THE MASTERMIND</h3>
+                <p class="text-gray-400 mb-6 leading-relaxed">AX adalah gabungan antara estetika visual dan kekuatan performa. Kami fokus pada detail yang orang lain lewatkan.</p>
+                
+                <div class="space-y-6 mt-10">
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-2"><span>Frontend Mastery</span><span>95%</span></div>
+                        <div class="h-[2px] w-full bg-white/10 relative overflow-hidden">
+                            <div class="skill-progress absolute h-full bg-white" data-width="95%"></div>
+                        </div>
                     </div>
-                    <div class="stats">
-                        <div class="stat-item"><span>100+</span> Proyek Selesai</div>
-                        <div class="stat-item"><span>01</span> Visi Fokus</div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-2"><span>Backend Logic</span><span>88%</span></div>
+                        <div class="h-[2px] w-full bg-white/10 relative overflow-hidden">
+                            <div class="skill-progress absolute h-full bg-white" data-width="88%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <div data-aos="fade-left" class="relative group">
+                <div class="absolute -inset-4 bg-gradient-to-r from-white/20 to-transparent blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" class="relative rounded-2xl grayscale hover:grayscale-0 transition duration-700" alt="Profile">
+            </div>
+        </div>
+    </section>
 
-        <section id="lab" class="lab">
-            <h2>INTERACTIVE LAB</h2>
-            <div class="card-container">
-                <div class="card" data-tilt>
-                    <h3>Kreativitas</h3>
-                    <p>Melampaui batas visual standar.</p>
-                </div>
-                <div class="card" data-tilt>
-                    <h3>Teknologi</h3>
-                    <p>Stack modern, performa tanpa kompromi.</p>
-                </div>
-                <div class="card" data-tilt>
-                    <h3>Strategi</h3>
-                    <p>Setiap piksel memiliki tujuan.</p>
+    <section id="projects" class="py-24 px-10 bg-[#080808]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <h2 class="text-6xl font-black italic opacity-10 absolute -mt-20 select-none">PROJECTS</h2>
+                <h3 class="text-4xl font-bold z-10">Selected Works</h3>
+                <div class="flex gap-4 mt-8 md:mt-0 filter-btns">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
                 </div>
             </div>
-        </section>
-    </main>
 
+            <div class="grid md:grid-cols-3 gap-8" id="project-grid">
+                <div class="project-card" data-category="web" data-aos="fade-up">
+                    <div class="overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500" class="hover:scale-110 transition duration-700">
+                    </div>
+                    <h4 class="text-xl font-bold">Cyber Dashboard</h4>
+                    <p class="text-gray-500">React & Three.js</p>
+                </div>
+                <div class="project-card" data-category="design" data-aos="fade-up" data-aos-delay="100">
+                    <div class="overflow-hidden rounded-xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=500" class="hover:scale-110 transition duration-700">
+                    </div>
+                    <h4 class="text-xl font-bold">Minimalist Branding</h4>
+                    <p class="text-gray-500">UI/UX Design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cv-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-6">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="toggleModal()"></div>
+        <div class="bg-white text-black p-12 rounded-3xl relative z-10 max-w-lg w-full transform transition-all scale-90 opacity-0" id="modal-content">
+            <h2 class="text-3xl font-bold mb-4">Curriculum Vitae</h2>
+            <p class="mb-6 opacity-70">Senior Full-Stack Developer dengan pengalaman 8 tahun di industri kreatif...</p>
+            <ul class="space-y-4 mb-8">
+                <li><strong>Expertise:</strong> Next.js, Node.js, AWS</li>
+                <li><strong>Location:</strong> Digital Nomad</li>
+            </ul>
+            <button onclick="toggleModal()" class="w-full bg-black text-white py-4 rounded-xl font-bold">Close</button>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-10 right-10 translate-y-20 opacity-0 transition-all duration-500 bg-white text-black px-6 py-4 rounded-xl font-bold z-[1001]">
+        Pesan Berhasil Terkirim!
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
