@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXSTORE | Welcome</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #4c6ef5, #7950f2, #f06595);
+            background-size: 300% 300%;
+            animation: bgmove 15s ease infinite;
+            color: white;
+            text-align: center;
+        }
+
+        @keyframes bgmove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: auto;
+            animation: fadeIn 3s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 50px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to AXSTORE</h1>
+        <p>
+            Halo! Ini adalah website personal sederhana namun indah, 
+            dibuat untuk menampilkan siapa aku, projectku, dan perjalanan IT-ku.
+        </p>
+
+        <a href="#" class="btn">Explore More</a>
+
+        <footer>
+            © 2026 AXSTORE — Crafted with ❤️ by Me
+        </footer>
+    </div>
+
+</body>
+</html>
