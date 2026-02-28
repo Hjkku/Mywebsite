@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Saya - Tema Gelap Menawan</title>
+    <title>AX DEVS | Portofolio Rangga</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a; /* Hitam agak terang */
-            color: #f0f0f0; /* Teks abu-abu terang */
-            opacity: 0; /* Awalnya transparan untuk animasi fade-in */
-            animation: fadeIn 1s ease-in-out forwards; /* Animasi fade-in */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212; /* Hitam yang lebih modern (sedikit lebih terang dari hitam pekat) */
+            color: #e0e0e0;
+            overflow-x: hidden;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* Container utama disembunyikan agar tidak kedip sebelum animasi */
+        .content-wrapper {
+            opacity: 0;
         }
 
         header {
-            background-color: #262626; /* Sedikit lebih terang dari body */
-            padding: 20px;
+            background-color: #1e1e1e;
+            padding: 40px 20px;
             text-align: center;
+            border-bottom: 1px solid #333;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2em;
+            font-size: 2.5em;
+            letter-spacing: -1px;
         }
 
         nav ul {
@@ -40,99 +38,151 @@
             list-style: none;
             display: flex;
             justify-content: center;
-            background-color: #333333;
-        }
-
-        nav li {
-            margin: 0;
+            background-color: #181818;
+            border-bottom: 1px solid #333;
         }
 
         nav a {
             display: block;
-            padding: 15px 25px;
+            padding: 20px 30px;
             text-decoration: none;
-            color: #f0f0f0;
-            transition: background-color 0.3s ease;
+            color: #b0b0b0;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            background-color: #444444;
+            color: #ffffff;
         }
 
         main {
-            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
 
         section {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         section h2 {
-            border-bottom: 2px solid #555555;
-            padding-bottom: 10px;
+            font-size: 1.8em;
+            color: #4CAF50; /* Aksen hijau agar segar */
             margin-bottom: 20px;
         }
 
         .about-me p {
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: #cccccc;
         }
 
-        .group-chat-link {
+        /* Tombol dengan Efek Interaktif */
+        .btn-interactive {
             display: inline-block;
-            background-color: #4CAF50; /* Warna hijau untuk tombol chat */
+            background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 35px;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            transition: background 0.3s ease;
         }
 
-        .group-chat-link:hover {
+        .btn-interactive:hover {
             background-color: #45a049;
         }
 
         footer {
-            background-color: #262626;
-            padding: 20px;
+            background-color: #181818;
+            padding: 30px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+
+        /* Kelas pembantu untuk animasi fade-in satu per satu */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Selamat Datang di Website Saya</h1>
-    </header>
+    <div class="content-wrapper">
+        <header>
+            <h1 class="reveal">Selamat Datang di <span style="color: #4CAF50;">AX DEVS</span></h1>
+        </header>
 
-    <nav>
-        <ul>
-            <li><a href="#about-me">Tentang Saya</a></li>
-            <li><a href="#group-chat">Grup Chat</a></li>
+        <nav>
+            <ul>
+                <li class="reveal"><a href="#about-me">Tentang Saya</a></li>
+                <li class="reveal"><a href="#group-chat">Grup Chat</a></li>
             </ul>
-    </nav>
+        </nav>
 
-    <main>
-        <section id="about-me" class="about-me">
-            <h2>Tentang Saya</h2>
-            <p>Halo! Saya Rangga, seorang Developer kecil yang sedang belajar bahasa pemrograman. Di sini Anda bisa menemukan informasi tentang saya, proyek saya, dan cara menghubungi saya.</p>
+        <main>
+            <section id="about-me" class="about-me">
+                <h2 class="reveal">Tentang Saya</h2>
+                <p class="reveal">Halo! Saya <strong>Rangga</strong>, seorang Developer kecil yang sedang belajar bahasa pemrograman. Di sini Anda bisa menemukan informasi tentang saya, proyek saya, dan cara menghubungi saya.</p>
             </section>
 
-        <section id="group-chat">
-            <h2>Grup Chat</h2>
-            <p>Bergabunglah dengan grup chat kami untuk berdiskusi tentang bot WhatsApp, store, dan masih banyak lagi.</p>
-            <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr?mode=hqctcla" class="group-chat-link" target="_blank">Gabung Grup Chat</a>
-        </section>
-
+            <section id="group-chat">
+                <h2 class="reveal">Grup Chat</h2>
+                <p class="reveal">Bergabunglah dengan grup chat kami untuk berdiskusi tentang bot WhatsApp, store, dan masih banyak lagi. Mari tumbuh bersama dalam komunitas!</p>
+                <div class="reveal" style="margin-top: 20px;">
+                    <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr?mode=hqctcla" class="btn-interactive" target="_blank">
+                        Gabung Grup Chat
+                    </a>
+                </div>
+            </section>
         </main>
 
-    <footer>
-        <p>&copy; 2026 AX DEVS. Semua hak dilindungi.</p>
-    </footer>
+        <footer>
+            <p class="reveal">&copy; 2026 AX DEVS. Semua hak dilindungi.</p>
+        </footer>
+    </div>
 
     <script>
+        // Tunggu semua aset selesai dimuat
         window.addEventListener('load', function() {
-            document.body.style.opacity = 1; 
+            // Munculkan container utama
+            gsap.to(".content-wrapper", { opacity: 1, duration: 0.5 });
+
+            // 1. Animasi Teks Fade In Satu Per Satu (Stagger)
+            gsap.to(".reveal", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2, // Jeda 0.2 detik antar elemen
+                ease: "power2.out"
+            });
+
+            // 2. Animasi Klik Tombol (Membesar saat ditekan)
+            const buttons = document.querySelectorAll('.btn-interactive, nav a');
+
+            buttons.forEach(btn => {
+                // Efek saat ditekan (Mouse Down / Touch Start)
+                btn.addEventListener('mousedown', () => {
+                    gsap.to(btn, { scale: 1.2, duration: 0.1, ease: "power1.out" });
+                });
+
+                // Efek saat dilepas (Mouse Up / Touch End)
+                btn.addEventListener('mouseup', () => {
+                    gsap.to(btn, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.3)" });
+                });
+
+                // Antisipasi jika kursor keluar dari tombol saat masih menekan
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, { scale: 1, duration: 0.4 });
+                });
+            });
         });
     </script>
 </body>
