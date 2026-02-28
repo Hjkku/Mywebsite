@@ -2,11 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>AX DEVS | Portfolio</title>
 
-    <meta name="theme-color" content="#0a0a0a">
-    <meta name="msapplication-navbutton-color" content="#0a0a0a">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -14,93 +14,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* RESET & BASE */
+        :root {
+            /* Senjata rahasia: Beritahu browser kalau web ini mode gelap total */
+            color-scheme: dark;
+        }
+
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: "Poppins", sans-serif;
-            background-color: #0a0a0a; /* Hitam Pekat */
+            background-color: #000000 !important; /* Hitam mutlak biar nyatu sama bezel */
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             color: #f0f0f0;
         }
 
-        /* Nav & Button Clean Up */
+        /* Clean up UI */
         button, a, .btn-explore, .btn-chat {
             -webkit-tap-highlight-color: transparent;
             outline: none;
-            user-select: none; 
-            -webkit-user-drag: none;
+            user-select: none;
         }
 
-        /* CORE ANIMATION */
         @keyframes grayMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* --- SCREEN 1: WELCOME (DYNAMIC GREY) --- */
+        /* --- WELCOME SCREEN --- */
         #welcome-screen {
             position: fixed;
             inset: 0;
             display: flex;
             justify-content: center; align-items: center;
             flex-direction: column; text-align: center;
-            background: linear-gradient(135deg, #0f0f0f, #2c2c2c, #1a1a1a, #0f0f0f);
+            background: linear-gradient(135deg, #000000, #222222, #111111, #000000);
             background-size: 400% 400%;
             animation: grayMove 10s ease infinite;
             z-index: 100;
         }
-        .welcome-content { z-index: 110; padding: 20px; }
         .reveal { opacity: 0; transform: translateY(30px); }
-        
-        h1 { 
-            color: white; 
-            font-size: clamp(2.5rem, 10vw, 4.5rem); 
-            font-weight: 900; 
-            margin: 0; 
-            line-height: 1.1; 
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            letter-spacing: -1px;
-        }
-        
-        p { color: #b0b0b0; margin: 25px auto; max-width: 550px; font-size: 1.1rem; line-height: 1.6; }
-        
-        .btn-explore { 
-            display: inline-block; 
-            background-color: #ffffff; 
-            color: #0a0a0a; 
-            padding: 18px 55px; 
-            font-size: 1.1rem; 
-            font-weight: 900; 
-            border: none; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
-            text-transform: uppercase; 
-            margin-top: 10px; 
-        }
+        h1 { color: white; font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: 900; margin: 0; letter-spacing: -1px; }
+        p { color: #888; margin: 25px auto; max-width: 550px; font-size: 1.1rem; }
+        .btn-explore { display: inline-block; background-color: #fff; color: #000; padding: 18px 55px; font-size: 1.1rem; font-weight: 900; border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        .welcome-footer { margin-top: 60px; color: #444; font-size: 0.8rem; opacity: 0; }
 
-        .welcome-footer { margin-top: 60px; color: #666; font-weight: 600; font-size: 0.8rem; opacity: 0; }
-
-        /* --- SCREEN 2: MAIN (FULL DYNAMIC GREY) --- */
+        /* --- MAIN SCREEN (DYNAMIC GREY) --- */
         #main-screen {
             position: absolute;
             top: 100%; left: 0; width: 100%; height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a, #252525, #121212, #333333, #0a0a0a);
+            background: linear-gradient(135deg, #000000, #1a1a1a, #0a0a0a, #252525, #000000);
             background-size: 400% 400%;
             animation: grayMove 8s ease-in-out infinite; 
             z-index: 50;
             overflow-y: auto;
-            scrollbar-width: none; /* Hide scrollbar Firefox */
+            scrollbar-width: none;
         }
-        #main-screen::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
+        #main-screen::-webkit-scrollbar { display: none; }
 
         header { 
-            background: rgba(10, 10, 10, 0.7); 
+            background: rgba(0, 0, 0, 0.8); 
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 50px 20px; 
+            padding: 60px 20px; 
             text-align: center; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
         }
@@ -110,24 +86,18 @@
         
         section { 
             margin-bottom: 40px; 
-            background: rgba(255, 255, 255, 0.03); 
+            background: rgba(255, 255, 255, 0.02); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
         
-        h2 { font-size: 1.8rem; border-left: 4px solid #fff; padding-left: 15px; margin-bottom: 20px; color: #fff; }
-        
-        .btn-chat {
-            background: #ffffff; color: #000; padding: 15px 30px; text-decoration: none; 
-            border-radius: 12px; font-weight: 800; display: inline-block;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        footer { text-align: center; padding: 40px 0; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
+        h2 { font-size: 1.8rem; border-left: 4px solid #fff; padding-left: 15px; margin-bottom: 20px; }
+        .btn-chat { background: #fff; color: #000; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; display: inline-block; }
+        footer { text-align: center; padding: 40px 0; opacity: 0.2; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -139,9 +109,7 @@
             <div class="reveal">
                 <button class="btn-explore" id="explore-btn">EXPLORE MORE</button>
             </div>
-            <div class="welcome-footer" id="w-footer">
-                © 2026 AXDEVS — STANDALONE
-            </div>
+            <div class="welcome-footer" id="w-footer">© 2026 AXDEVS — AXSTORE.MY.ID</div>
         </div>
     </div>
 
@@ -165,32 +133,25 @@
 
     <script>
         const exploreBtn = document.getElementById('explore-btn');
-
-        // Entrance
         window.addEventListener('load', () => {
             gsap.timeline()
                 .to(".reveal", { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" })
                 .to("#w-footer", { opacity: 1, duration: 1 }, "-=0.4");
         });
-
-        // Slide Transition
         exploreBtn.addEventListener('click', () => {
-            const tl = gsap.timeline();
-            tl.to("#welcome-screen", { y: "-100%", duration: 1.2, ease: "expo.inOut" })
-              .to("#main-screen", { top: "0%", duration: 1.2, ease: "expo.inOut" }, "-=1.2")
-              .to(".main-reveal", { opacity: 1, y: 0, stagger: 0.2, duration: 0.6 }, "-=0.4");
-            
+            gsap.timeline()
+                .to("#welcome-screen", { y: "-100%", duration: 1.2, ease: "expo.inOut" })
+                .to("#main-screen", { top: "0%", duration: 1.2, ease: "expo.inOut" }, "-=1.2")
+                .to(".main-reveal", { opacity: 1, y: 0, stagger: 0.2, duration: 0.6 }, "-=0.4");
             setTimeout(() => { document.body.style.overflow = "auto"; }, 1200);
         });
-
-        // Pro Button Feedback
         const btns = document.querySelectorAll('.btn-explore, .btn-chat');
         btns.forEach(btn => {
             const up = () => gsap.to(btn, { scale: 1.1, duration: 0.1 });
             const down = () => gsap.to(btn, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.3)" });
             btn.addEventListener('touchstart', up);
-            btn.addEventListener('mousedown', up);
             btn.addEventListener('touchend', down);
+            btn.addEventListener('mousedown', up);
             btn.addEventListener('mouseup', down);
         });
     </script>
