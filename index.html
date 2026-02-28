@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AX DEVS | Portfolio & Store</title>
+    <title>AX DEVS | Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: "Poppins", sans-serif;
-            overflow: hidden;
             background-color: #1a1a1a;
+            overflow: hidden; /* Dikunci dulu biar gak scroll pas welcome */
         }
 
-        /* --- SCREEN 1: WELCOME (GRADASI ABU-ABU GANTI-GANTI) --- */
+        /* SCREEN 1: WELCOME */
         #welcome-screen {
-            position: absolute;
-            width: 100%; height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             text-align: center;
-            /* Gradasi Abu-abu ke Hitam yang bergerak */
-            background: linear-gradient(135deg, #1a1a1a, #333333, #4d4d4d, #262626);
+            /* BG ABU-ABU GRADASI GERAK */
+            background: linear-gradient(135deg, #1a1a1a, #3a3a3a, #262626, #1a1a1a);
             background-size: 400% 400%;
             animation: grayMove 12s ease infinite;
-            z-index: 10;
-            color: white;
+            z-index: 100;
         }
 
         @keyframes grayMove {
@@ -36,94 +37,86 @@
         }
 
         .welcome-content {
-            position: relative;
-            z-index: 2;
+            z-index: 110;
             padding: 20px;
         }
 
+        /* Elemen yang akan di-animasi (Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
         h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: white;
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
             font-weight: 900;
             margin: 0;
-            letter-spacing: -1px;
-            text-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         p {
-            font-size: 1.1rem;
-            max-width: 550px;
-            margin: 20px auto;
             color: #d1d1d1;
+            margin: 25px auto;
+            max-width: 550px;
+            font-size: 1.1rem;
             line-height: 1.6;
         }
 
-        /* BUTTON PUTIH SOLID (GAK MUNGKIN GAK KELIHATAN) */
+        /* TOMBOL PUTIH SOLID - ANTI GHOIB */
         .btn-explore {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 18px 50px;
-            background: #ffffff; /* Putih Solid */
-            color: #1a1a1a;    /* Teks Hitam */
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .btn-explore:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            background: #f0f0f0;
-        }
-
-        .welcome-footer {
-            margin-top: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #ffffff;
-            opacity: 0.8;
-            letter-spacing: 1px;
-        }
-
-        /* --- SCREEN 2: MAIN (HITAM LEBIH TERANG) --- */
-        #main-screen {
-            position: absolute;
-            top: 100%; width: 100%; height: 100vh;
-            background-color: #1a1a1a; /* Hitam agak terang */
-            color: #f0f0f0;
-            overflow-y: auto;
-            z-index: 5;
-        }
-
-        header { 
-            background-color: #262626; 
-            padding: 50px 20px; 
-            text-align: center; 
-            border-bottom: 2px solid #ffffff; 
-        }
-
-        nav { background: #333333; position: sticky; top: 0; z-index: 100; }
-        nav ul { display: flex; justify-content: center; list-style: none; padding: 0; margin: 0; }
-        nav a { display: block; padding: 20px 30px; color: #ffffff; text-decoration: none; font-weight: 700; }
-
-        main { max-width: 800px; margin: 0 auto; padding: 50px 20px; }
-        section { margin-bottom: 60px; opacity: 0; transform: translateY(40px); }
-        
-        h2 { font-size: 2rem; border-left: 5px solid #ffffff; padding-left: 15px; margin-bottom: 25px; }
-
-        .btn-chat {
             display: inline-block;
             background-color: #ffffff;
             color: #1a1a1a;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 800;
-            transition: 0.3s;
+            padding: 18px 55px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border: none;
+            border-radius: 50px; /* Lebih bulat biar modern */
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            margin-top: 10px;
+            outline: none;
+        }
+
+        .welcome-footer {
+            margin-top: 60px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0; /* Diatur lewat GSAP */
+        }
+
+        /* SCREEN 2: MAIN */
+        #main-screen {
+            position: absolute;
+            top: 100%; /* Mulai dari bawah layar */
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            z-index: 50;
+            overflow-y: auto;
+        }
+
+        header { background: #262626; padding: 60px 20px; text-align: center; border-bottom: 2px solid white; }
+        nav { background: #333; position: sticky; top: 0; z-index: 1000; }
+        nav ul { display: flex; justify-content: center; list-style: none; padding: 0; margin: 0; }
+        nav a { display: block; padding: 20px 30px; color: #fff; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        nav a:hover { background: #444; }
+
+        main { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .main-reveal { opacity: 0; transform: translateY(30px); }
+        
+        section { margin-bottom: 60px; }
+        h2 { font-size: 2rem; border-left: 5px solid white; padding-left: 20px; margin-bottom: 25px; }
+        
+        .btn-chat {
+            background: white; color: black; padding: 15px 35px; text-decoration: none; 
+            border-radius: 10px; font-weight: 800; display: inline-block;
         }
     </style>
 </head>
@@ -131,13 +124,12 @@
 
     <div id="welcome-screen">
         <div class="welcome-content">
-            <h1 id="w-title">WELCOME TO<br>AXSTORE</h1>
-            <p id="w-text">
-                Halo! Ini adalah website personal saya. Dibuat dengan dedikasi untuk 
-                menampilkan project, store, dan perjalanan saya di dunia programming.
-            </p>
+            <h1 class="reveal">WELCOME TO<br>AXSTORE</h1>
+            <p class="reveal">Portal resmi AX DEVS. Tempat eksplorasi project bot WhatsApp dan layanan digital terbaik untuk perjalanan IT Anda.</p>
             
-            <button class="btn-explore" id="explore-btn">Explore More</button>
+            <div class="reveal">
+                <button class="btn-explore" id="explore-btn">EXPLORE MORE</button>
+            </div>
             
             <div class="welcome-footer" id="w-footer">
                 © 2026 AXDEVS — Crafted with ❤️ by Me
@@ -147,79 +139,90 @@
 
     <div id="main-screen">
         <header>
-            <h1>AX <span style="text-decoration: underline;">DEVS</span></h1>
+            <h1 style="font-size: 3rem; margin:0;">AX DEVS</h1>
         </header>
-
         <nav>
             <ul>
                 <li><a href="#about">ABOUT</a></li>
                 <li><a href="#group">GROUP</a></li>
             </ul>
         </nav>
-
         <main>
-            <section id="about">
+            <section id="about" class="main-reveal">
                 <h2>Tentang Saya</h2>
-                <p>Halo! Saya <strong>Rangga</strong>, seorang Developer kecil yang sedang belajar bahasa pemrograman. Fokus saya saat ini adalah pengembangan bot WhatsApp dan layanan store digital.</p>
+                <p>Saya <strong>Rangga</strong>, seorang developer yang berfokus pada pengembangan Bot WhatsApp dan Digital Store. Saya percaya teknologi bisa mempermudah segalanya.</p>
             </section>
-
-            <section id="group">
+            <section id="group" class="main-reveal">
                 <h2>Grup Chat</h2>
-                <p>Mari bergabung dengan komunitas AX DEVS untuk diskusi seputar bot, pemrograman, dan update produk terbaru.</p>
-                <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr" class="btn-chat" target="_blank">GABUNG GRUP</a>
+                <p>Bergabunglah dengan komunitas kami untuk mendapatkan update terbaru dan diskusi seputar programming.</p>
+                <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr" class="btn-chat">GABUNG SEKARANG</a>
             </section>
         </main>
-        
-        <footer style="text-align: center; padding: 40px; color: #666; font-size: 0.8rem; border-top: 1px solid #333;">
-            © 2026 AX DEVS. All Rights Reserved.
-        </footer>
     </div>
 
     <script>
         const exploreBtn = document.getElementById('explore-btn');
-        
-        // 1. Animasi Masuk Awal (GSAP)
+
+        // 1. ANIMASI MASUK (Reveal Staggered)
         window.addEventListener('load', () => {
             const tl = gsap.timeline();
-            tl.from("#w-title", { opacity: 0, y: -50, duration: 1.2, ease: "power4.out" })
-              .from("#w-text", { opacity: 0, y: 30, duration: 1, ease: "power4.out" }, "-=0.7")
-              .from(".btn-explore", { opacity: 0, scale: 0.5, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6")
-              .from("#w-footer", { opacity: 0, duration: 1 }, "-=0.4");
+            
+            // Munculkan teks satu per satu
+            tl.to(".reveal", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.3,
+                ease: "power4.out"
+            })
+            // Munculkan footer terakhir
+            .to("#w-footer", {
+                opacity: 0.8,
+                duration: 1
+            }, "-=0.5");
         });
 
-        // 2. Transisi Slide ke Main Screen
+        // 2. ANIMASI TRANSISI SLIDE UP
         exploreBtn.addEventListener('click', () => {
             const slideTl = gsap.timeline();
             
-            slideTl.to("#welcome-screen", { 
-                y: "-100%", 
-                duration: 1.5, 
-                ease: "expo.inOut" 
+            slideTl.to("#welcome-screen", {
+                y: "-100%",
+                duration: 1.3,
+                ease: "expo.inOut"
             })
-            .to("#main-screen", { 
-                top: "0%", 
-                duration: 1.5, 
-                ease: "expo.inOut" 
-            }, "-=1.5")
-            .to("section", { 
-                opacity: 1, 
-                y: 0, 
-                stagger: 0.3, 
-                duration: 1,
-                ease: "power3.out"
+            .to("#main-screen", {
+                top: "0%",
+                duration: 1.3,
+                ease: "expo.inOut"
+            }, "-=1.3")
+            .to(".main-reveal", {
+                opacity: 1,
+                y: 0,
+                stagger: 0.3,
+                duration: 0.8,
+                ease: "power2.out"
             }, "-=0.5");
 
-            // Biarkan user bisa scroll setelah transisi
+            // Izinkan scroll setelah slide selesai
             setTimeout(() => {
                 document.body.style.overflow = "auto";
-            }, 1500);
+            }, 1300);
         });
 
-        // 3. Efek Klik Tombol Membesar/Mengecil
-        const allBtns = document.querySelectorAll('button, .btn-chat, nav a');
-        allBtns.forEach(btn => {
-            btn.addEventListener('mousedown', () => gsap.to(btn, { scale: 0.9, duration: 0.1 }));
-            btn.addEventListener('mouseup', () => gsap.to(btn, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" }));
+        // 3. EFEK KLIK TOMBOL (Membesar & Membal)
+        const btns = document.querySelectorAll('.btn-explore, .btn-chat, nav a');
+        btns.forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                gsap.to(btn, { scale: 0.85, duration: 0.1 });
+            });
+            btn.addEventListener('mouseup', () => {
+                gsap.to(btn, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+            });
+            // Jika jari/mouse keluar tapi masih nahan
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { scale: 1, duration: 0.5 });
+            });
         });
     </script>
 </body>
