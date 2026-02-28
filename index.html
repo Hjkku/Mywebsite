@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXSTORE | Welcome</title>
+    <title>AX DEVS | Portfolio & Store</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             font-family: "Poppins", sans-serif;
+            overflow: hidden; /* Mencegah scroll manual saat transisi */
+            background-color: #121212;
+        }
+
+        /* --- HALAMAN 1: WELCOME --- */
+        #welcome-screen {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             background: linear-gradient(135deg, #4c6ef5, #7950f2, #f06595);
             background-size: 300% 300%;
             animation: bgmove 15s ease infinite;
+            z-index: 10;
             color: white;
-            text-align: center;
         }
 
         @keyframes bgmove {
@@ -21,70 +40,141 @@
             100% { background-position: 0% 50%; }
         }
 
-        .container {
-            padding: 60px 20px;
+        /* --- HALAMAN 2: MAIN --- */
+        #main-screen {
+            position: absolute;
+            top: 100%; /* Sembunyikan di bawah layar */
+            width: 100%;
+            height: 100vh;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-y: auto;
+            z-index: 5;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            animation: fadeIn 2s ease;
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(-20px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-
-        p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: auto;
-            animation: fadeIn 3s ease;
-        }
-
-        .btn {
+        /* Styling Konten Main */
+        header { background-color: #1e1e1e; padding: 40px 20px; text-align: center; border-bottom: 1px solid #333; }
+        nav ul { display: flex; justify-content: center; list-style: none; padding: 0; background: #181818; margin: 0; }
+        nav a { display: block; padding: 15px 25px; color: #b0b0b0; text-decoration: none; font-weight: 600; }
+        main { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        section { margin-bottom: 50px; opacity: 0; transform: translateY(30px); } /* Untuk animasi reveal nanti */
+        
+        .btn-welcome {
             display: inline-block;
             margin-top: 30px;
-            padding: 12px 30px;
+            padding: 12px 35px;
             background: rgba(255,255,255,0.2);
-            border-radius: 8px;
-            backdrop-filter: blur(6px);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.4);
             color: white;
-            font-size: 1.1rem;
-            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .btn:hover {
-            background: rgba(255,255,255,0.35);
-            transform: scale(1.05);
+        .btn-chat {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
         }
 
-        footer {
-            margin-top: 50px;
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 30px; color: #555; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Welcome to AXSTORE</h1>
-        <p>
+    <div id="welcome-screen">
+        <h1 id="w-title" style="font-size: 3.5rem; margin: 0;">Welcome to AXSTORE</h1>
+        <p id="w-text" style="max-width: 600px; margin: 20px auto; opacity: 0.9;">
             Halo! Ini adalah website personal sederhana namun indah, 
             dibuat untuk menampilkan siapa aku, projectku, dan perjalanan IT-ku.
         </p>
-
-        <a href="main" class="btn">Explore More</a>
-
-        <footer>
-            © 2026 AXDEVS — Crafted with ❤️ by Me
+        <button class="btn-welcome" id="explore-btn">Explore More</button>
+        <footer style="position: absolute; bottom: 20px; opacity: 0.6;">
+            © 2026 AXDEVS — Crafted with ❤️
         </footer>
     </div>
 
+    <div id="main-screen">
+        <header>
+            <h1>AX <span style="color: #4CAF50;">DEVS</span></h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#group">Group</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="about">
+                <h2 style="color: #4CAF50;">Tentang Saya</h2>
+                <p>Halo! Saya <strong>Rangga</strong>, seorang Developer kecil yang sedang belajar bahasa pemrograman. Saya fokus pada pengembangan bot WhatsApp dan eksplorasi teknologi baru.</p>
+            </section>
+
+            <section id="group">
+                <h2 style="color: #4CAF50;">Grup Chat</h2>
+                <p>Bergabunglah dengan grup chat kami untuk berdiskusi tentang bot WhatsApp, store, dan masih banyak lagi.</p>
+                <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr" class="btn-chat" target="_blank">Gabung Sekarang</a>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 AX DEVS. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const exploreBtn = document.getElementById('explore-btn');
+        
+        // --- ANIMASI MASUK (WELCOME) ---
+        window.addEventListener('load', () => {
+            gsap.from("#w-title", { opacity: 0, y: -30, duration: 1.2, ease: "power4.out" });
+            gsap.from("#w-text", { opacity: 0, y: 20, duration: 1.2, delay: 0.3, ease: "power4.out" });
+            gsap.from(".btn-welcome", { opacity: 0, scale: 0.8, duration: 1, delay: 0.6, ease: "back.out(1.7)" });
+        });
+
+        // --- ANIMASI TRANSISI (SLIDE UP) ---
+        exploreBtn.addEventListener('click', () => {
+            const tl = gsap.timeline();
+
+            tl.to("#welcome-screen", {
+                y: "-100%", // Geser Welcome ke atas luar layar
+                duration: 1.2,
+                ease: "expo.inOut"
+            })
+            .to("#main-screen", {
+                top: "0%", // Tarik Main ke atas
+                duration: 1.2,
+                ease: "expo.inOut"
+            }, "-=1.2") // Jalankan berbarengan dengan Welcome
+            .to("section", {
+                opacity: 1,
+                y: 0,
+                stagger: 0.3, // Munculkan konten satu per satu
+                duration: 0.8,
+                ease: "power2.out"
+            });
+
+            // Aktifkan scroll pada Main Screen setelah transisi selesai
+            setTimeout(() => {
+                document.body.style.overflow = "auto";
+            }, 1200);
+        });
+
+        // --- EFEK KLIK TOMBOL (INTERACTIVE) ---
+        const allButtons = document.querySelectorAll('.btn-welcome, .btn-chat, nav a');
+        allButtons.forEach(btn => {
+            btn.addEventListener('mousedown', () => gsap.to(btn, { scale: 0.9, duration: 0.1 }));
+            btn.addEventListener('mouseup', () => gsap.to(btn, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.3)" }));
+        });
+    </script>
 </body>
 </html>
