@@ -9,91 +9,127 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <link rel="manifest" href="data:application/manifest+json,{'display':'standalone','background_color':'#000000','theme_color':'#000000'}">
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&amp;display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            color-scheme: dark;
-        }
+        :root { color-scheme: dark; }
+        
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: "Poppins", sans-serif;
             background-color: #000000 !important;
-            min-height: -webkit-fill-available;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             color: #f0f0f0;
+            user-select: none; /* Mencegah seleksi teks */
         }
-        button, a, .btn-explore, .btn-chat {
-            -webkit-tap-highlight-color: transparent;
-            outline: none;
-            user-select: none;
-        }
+
         @keyframes grayMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        /* --- SCREEN 1: WELCOME --- */
         #welcome-screen {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            display: flex;
-            justify-content: center; align-items: center;
+            position: fixed; inset: 0;
+            display: flex; justify-content: center; align-items: center;
             flex-direction: column; text-align: center;
             background: linear-gradient(135deg, #000000, #222222, #111111, #000000);
             background-size: 400% 400%;
             animation: grayMove 10s ease infinite;
             z-index: 100;
-            padding-bottom: env(safe-area-inset-bottom);
         }
         .reveal { opacity: 0; transform: translateY(30px); }
         h1 { color: white; font-size: clamp(2.5rem, 10vw, 4.5rem); font-weight: 900; margin: 0; letter-spacing: -1px; line-height: 1.1; }
         p { color: #888; margin: 25px auto; max-width: 550px; font-size: 1.1rem; }
-        .btn-explore { display: inline-block; background-color: #fff; color: #000; padding: 18px 55px; font-size: 1.1rem; font-weight: 900; border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
-        .welcome-footer { margin-top: 60px; color: #444; font-size: 0.8rem; opacity: 0; }
+        .btn-explore { background-color: #fff; color: #000; padding: 18px 55px; font-size: 1.1rem; font-weight: 900; border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; }
 
+        /* --- SCREEN 2: MAIN --- */
         #main-screen {
-            position: absolute;
-            top: 100%; left: 0; width: 100%; height: 100vh;
+            position: absolute; top: 100%; left: 0; width: 100%; height: 100vh;
             background: linear-gradient(135deg, #000000, #1a1a1a, #0a0a0a, #252525, #000000);
             background-size: 400% 400%;
             animation: grayMove 8s ease-in-out infinite; 
-            z-index: 50;
-            overflow-y: auto;
-            scrollbar-width: none;
-            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 50; overflow-y: auto; scroll-behavior: smooth;
         }
         #main-screen::-webkit-scrollbar { display: none; }
-        header { 
-            background: rgba(0, 0, 0, 0.8); 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 60px 20px; 
-            text-align: center; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-        }
+
+        header { padding: 60px 20px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         main { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        .main-reveal { opacity: 0; transform: translateY(30px); }
+        
+        .scroll-reveal { opacity: 0; }
         section { 
-            margin-bottom: 40px; 
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 35px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px; background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px);
+            padding: 35px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
+        
         h2 { font-size: 1.8rem; border-left: 4px solid #fff; padding-left: 15px; margin-bottom: 20px; }
-        .btn-chat { background: #fff; color: #000; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; display: inline-block; }
+        h3 { font-size: 1.1rem; color: #fff; margin-bottom: 15px; }
+        
+        .btn-chat { background: #fff; color: #000; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; display: inline-block; transition: 0.3s; }
+        .btn-detail { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 15px; letter-spacing: 1px; }
+
+        /* --- HIGHLIGHT LOGIC --- */
+        .hl-item { cursor: pointer; border: 2px solid transparent; transition: background 0.3s, border-color 0.3s; position: relative; }
+        .hl-item.is-highlighted {
+            background: rgba(255,255,255,0.08) !important;
+            border-bottom-color: rgba(255,255,255,0.8) !important;
+            border-left-color: rgba(255,255,255,0.8) !important;
+        }
+
+        .bot-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 25px; }
+        .bot-card { background: rgba(255,255,255,0.03); border-radius: 15px; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; }
+
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .product-item { padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px; font-size: 0.85rem; }
+        
+        .stats-panel { display: flex; justify-content: space-around; gap: 8px; margin-bottom: 25px; }
+        .stat-box { text-align: center; flex: 1; background: rgba(0,0,0,0.3); padding: 15px 5px; border-radius: 15px; }
+        .stat-value { display: block; font-weight: 900; font-size: 1.1rem; }
+        .stat-label { font-size: 0.6rem; color: #888; text-transform: uppercase; }
+
+        /* --- DETAIL OVERLAY --- */
+        #detail-overlay {
+            position: fixed; top: 0; left: 100%; width: 100%; height: 100%;
+            background: #000; z-index: 200; overflow-y: auto;
+            padding: 80px 20px 40px; box-sizing: border-box;
+        }
+        .back-btn {
+            position: absolute; top: 25px; left: 20px;
+            background: #fff; color: #000; padding: 8px 20px;
+            border-radius: 50px; display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; cursor: pointer; border: none; font-weight: 900;
+        }
+        .detail-card { 
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px; border-radius: 20px; margin-bottom: 20px;
+        }
+
+        /* --- PRICE LIST STYLING --- */
+        .fee-list { display: flex; flex-direction: column; gap: 8px; }
+        .fee-row { 
+            display: flex; justify-content: space-between; padding: 12px 15px; 
+            background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.85rem;
+        }
+
+        .panel-info { 
+            display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0;
+        }
+        .badge { 
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+            padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;
+        }
+
         footer { text-align: center; padding: 40px 0 60px 0; opacity: 0.2; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
+
     <div id="welcome-screen">
         <div class="welcome-content">
             <h1 class="reveal">WELCOME TO<br>AXSTORE</h1>
@@ -101,48 +137,193 @@
             <div class="reveal">
                 <button class="btn-explore" id="explore-btn">EXPLORE MORE</button>
             </div>
-            <div class="welcome-footer" id="w-footer">© 2026 AXDEVS — AXSTORE.MY.ID</div>
         </div>
     </div>
+
     <div id="main-screen">
         <header>
             <h1 style="font-size: 2.8rem; margin:0; letter-spacing: -2px;">AX DEVS</h1>
         </header>
         <main>
-            <section id="about" class="main-reveal">
+            <section id="about" class="scroll-reveal" data-side="center">
                 <h2>Tentang Saya</h2>
                 <p>Hai, saya <strong>Rangga</strong>. Developer yang fokus membangun ekosistem Bot WhatsApp dan solusi Digital Store yang simpel tapi powerfull.</p>
             </section>
-            <section id="group" class="main-reveal">
+
+            <section id="group" class="scroll-reveal" data-side="center">
                 <h2>Grup Chat</h2>
                 <p>Diskusi santai, update script, dan layanan premium AX DEVS semua ada di sini.</p>
                 <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr" class="btn-chat">GABUNG GRUP</a>
             </section>
+
+            <section id="store">
+                <h2 class="scroll-reveal" data-side="left">Etalase AX STORE</h2>
+                
+                <h3>Sewa Bot Jaga Grup</h3>
+                <div class="bot-grid">
+                    <div class="bot-card hl-item scroll-reveal" data-side="left"><span>Sewa 2 Minggu</span><strong>Rp4.000</strong></div>
+                    <div class="bot-card hl-item scroll-reveal" data-side="right"><span>Sewa 1 Bulan</span><strong>Rp7.000</strong></div>
+                </div>
+
+                <h3>List Produk</h3>
+                <div class="product-grid">
+                    <div class="product-item hl-item scroll-reveal" data-side="left">📞 Nokos All Apk</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="right">🍿 Apk Entertainment</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="left">🎫 Voucher Game</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="right">💳 Top Up E-Wallet</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="left">🎮 Top Up Game</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="right">💻 Panel Pterodactyl</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="left">🤝 Jasa Mc/Rekber</div>
+                </div>
+
+                <button class="btn-detail scroll-reveal" id="open-detail" data-side="center">📂 LIHAT DETAIL & PRICE LIST</button>
+
+                <h3 style="margin-top: 40px;">Status Transaksi</h3>
+                <div class="stats-panel">
+                    <div class="stat-box hl-item scroll-reveal" data-side="left"><span class="stat-value counter" data-target="7">0</span><span class="stat-label">Total</span></div>
+                    <div class="stat-box hl-item scroll-reveal" data-side="left"><span class="stat-value counter" style="color:#4CAF50" data-target="7">0</span><span class="stat-label">Sukses</span></div>
+                    <div class="stat-box hl-item scroll-reveal" data-side="right"><span class="stat-value counter" style="color:#FFC107" data-target="0">0</span><span class="stat-label">Pending</span></div>
+                    <div class="stat-box hl-item scroll-reveal" data-side="right"><span class="stat-value counter" style="color:#F44336" data-target="0">0</span><span class="stat-label">Gagal</span></div>
+                </div>
+
+                <div style="text-align: center; padding-top: 20px;" class="scroll-reveal" data-side="center">
+                    <a href="https://wa.me/6285854949441" class="btn-chat" style="background:#25D366; color:white;">🎁 CHAT WHATSAPP</a>
+                </div>
+            </section>
         </main>
         <footer>AX DEVS ECOSYSTEM</footer>
     </div>
+
+    <div id="detail-overlay">
+        <button class="back-btn" id="close-detail">← KEMBALI</button>
+        
+        <h1 style="font-size: 1.8rem; margin-bottom: 30px;">Detail Layanan</h1>
+
+        <div class="detail-card hl-item">
+            <h3 style="color: #4db8ff;">PANEL PTERODACTYL PRIVATE🔐</h3>
+            <div class="panel-info">
+                <span class="badge" style="color:#4db8ff">High Performance</span>
+                <span class="badge" style="color:#ff4d4d">Anti-DDoS</span>
+                <span class="badge" style="color:#4dff88">Auto-Setup</span>
+            </div>
+            <p style="font-size: 0.9rem; line-height: 1.8;">
+                💻 <strong>1GB = 1k</strong><br>
+                🚀 1GB : 1k.....<br>
+                💾 Unlimited : 11k<br>
+                🛡 Garansi 15 hari
+            </p>
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; font-size: 0.8rem; margin-top: 10px;">
+                <strong>🍀 BENEFIT:</strong>
+                <ul style="margin: 5px 0; padding-left: 18px;">
+                    <li>Anti-DDoS Protection</li>
+                    <li>Privasi sangat tertutup & aman</li>
+                    <li>Uptime server terjaga</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="detail-card">
+            <h3 style="color: #ffcc00; margin-bottom: 15px;">MC/REKBER LIST</h3>
+            <div class="fee-list">
+                <div class="fee-row hl-item"><span>Transaksi 0 - 15k</span><strong>Fee 1k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 16 - 39k</span><strong>Fee 2k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 40 - 59k</span><strong>Fee 3k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 60 - 79k</span><strong>Fee 4k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 80 - 99k</span><strong>Fee 5k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 100 - 199k</span><strong>Fee 6k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 200 - 300k</span><strong>Fee 8k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 300k+</span><strong>Fee 10k</strong></div>
+            </div>
+            <p style="font-size: 0.75rem; color: #ffbaba; margin-top: 20px; line-height: 1.4;">
+                ! Selalu gunakan MC/rekber saat bertransaksi dengan penjual asing agar terhindar dari ripper !
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/6285854949441" class="btn-chat" style="background:#25D366; color:white; width: 100%; box-sizing: border-box; text-align: center;">🍀 HUBUNGI ADMIN</a>
+        </div>
+    </div>
+
     <script>
-        const exploreBtn = document.getElementById('explore-btn');
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- AX DEVS SECURITY SYSTEM
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+
+        if (window.self !== window.top) { window.top.location = window.self.location; }
+
+        // Console Spam Protection
+        setInterval(() => {
+            console.clear();
+            console.log('MAU NGAPAIN?? NGEHACKKK? HAHHH?');
+            console.log('THIS SYSTEM IS CREATED BY AX DEVS AND GEMINI BOYYY');
+            console.log('Mending lu balik tidur atau order aja di wa.me/6285854949441');
+        }, 500);
+
+        // --- UI LOGIC ---
         window.addEventListener('load', () => {
-            gsap.timeline()
-                .to(".reveal", { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" })
-                .to("#w-footer", { opacity: 1, duration: 1 }, "-=0.4");
+            gsap.to(".reveal", { opacity: 1, y: 0, duration: 1, stagger: 0.3, ease: "power4.out" });
         });
-        exploreBtn.addEventListener('click', () => {
+
+        document.getElementById('explore-btn').addEventListener('click', () => {
             gsap.timeline()
-                .to("#welcome-screen", { y: "-100%", duration: 1.2, ease: "expo.inOut" })
-                .to("#main-screen", { top: "0%", duration: 1.2, ease: "expo.inOut" }, "-=1.2")
-                .to(".main-reveal", { opacity: 1, y: 0, stagger: 0.2, duration: 0.6 }, "-=0.4");
-            setTimeout(() => { document.body.style.overflow = "auto"; }, 1200);
+                .to("#welcome-screen", { yPercent: -100, duration: 1.5, ease: "expo.inOut" })
+                .to("#main-screen", { top: "0%", duration: 1.5, ease: "expo.inOut" }, "-=1.5")
+                .add(() => { initScrollAnimations(); document.body.style.overflow = "auto"; });
         });
-        const btns = document.querySelectorAll('.btn-explore, .btn-chat');
-        btns.forEach(btn => {
-            const up = () => gsap.to(btn, { scale: 1.1, duration: 0.1 });
-            const down = () => gsap.to(btn, { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.3)" });
-            btn.addEventListener('touchstart', up);
-            btn.addEventListener('touchend', down);
-            btn.addEventListener('mousedown', up);
-            btn.addEventListener('mouseup', down);
+
+        const overlay = document.getElementById('detail-overlay');
+        document.getElementById('open-detail').addEventListener('click', () => {
+            gsap.to(overlay, { left: "0%", duration: 0.8, ease: "power4.inOut" });
+            document.body.style.overflow = "hidden";
+        });
+
+        document.getElementById('close-detail').addEventListener('click', () => {
+            gsap.to(overlay, { left: "100%", duration: 0.8, ease: "power4.inOut" });
+            document.body.style.overflow = "auto";
+        });
+
+        function setupHighlights() {
+            const items = document.querySelectorAll('.hl-item');
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const parent = item.parentElement;
+                    parent.querySelectorAll('.hl-item').forEach(i => i.classList.remove('is-highlighted'));
+                    item.classList.add('is-highlighted');
+                    gsap.fromTo(item, { scale: 0.98 }, { scale: 1.03, duration: 0.4, ease: "back.out(2)" });
+                });
+            });
+        }
+        setupHighlights();
+
+        function initScrollAnimations() {
+            document.querySelectorAll('.scroll-reveal').forEach((item) => {
+                const side = item.getAttribute('data-side');
+                let startX = side === 'left' ? -100 : (side === 'right' ? 100 : 0);
+                gsap.fromTo(item, { opacity: 0, x: startX, y: 40 }, { 
+                    opacity: 1, x: 0, y: 0, duration: 1.2, ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: item, scroller: "#main-screen", start: "top 85%",
+                        onEnter: () => {
+                            const c = item.querySelector('.counter');
+                            if(c) gsap.to(c, { innerText: c.dataset.target, duration: 2.5, snap: { innerText: 1 } });
+                        }
+                    }
+                });
+            });
+        }
+
+        document.querySelectorAll('.btn-explore, .btn-chat, .btn-detail, .back-btn').forEach(btn => {
+            btn.addEventListener('touchstart', () => gsap.to(btn, { scale: 0.9, duration: 0.1 }));
+            btn.addEventListener('touchend', () => gsap.to(btn, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" }));
         });
     </script>
 </body>
