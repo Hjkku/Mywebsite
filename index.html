@@ -26,7 +26,7 @@
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             color: #f0f0f0;
-            user-select: none;
+            user-select: none; /* Mencegah seleksi teks */
         }
 
         @keyframes grayMove {
@@ -60,7 +60,7 @@
         }
         #main-screen::-webkit-scrollbar { display: none; }
 
-        header { padding: 40px 20px 20px; text-align: center; }
+        header { padding: 60px 20px 20px; text-align: center; }
         main { max-width: 800px; margin: 0 auto; padding: 20px; }
         
         .scroll-reveal { opacity: 0; }
@@ -73,25 +73,21 @@
         h2 { font-size: 1.8rem; border-left: 4px solid #fff; padding-left: 15px; margin-bottom: 20px; }
         h3 { font-size: 1.1rem; color: #fff; margin-bottom: 15px; }
         
-        /* Stats Styling */
-        .stats-panel { display: flex; justify-content: space-around; gap: 8px; margin-bottom: 25px; }
-        .stat-box { text-align: center; flex: 1; background: rgba(0,0,0,0.3); padding: 15px 5px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.03); }
-        .stat-value { display: block; font-weight: 900; font-size: 1.1rem; }
-        .stat-label { font-size: 0.6rem; color: #888; text-transform: uppercase; }
-
-        /* User Stats Top */
-        .user-stats-top { 
-            display: flex; justify-content: center; gap: 20px; 
-            margin: 0 auto 30px; max-width: 400px;
-            padding: 10px; background: rgba(255,255,255,0.03);
-            border-radius: 50px; border: 1px solid rgba(255,255,255,0.05);
-        }
-        .user-stat-item { font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-        .dot-online { width: 8px; height: 8px; background: #00e676; border-radius: 50%; box-shadow: 0 0 10px #00e676; }
-
         .btn-chat { background: #fff; color: #000; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; display: inline-block; transition: 0.3s; }
         .btn-detail { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 15px; letter-spacing: 1px; }
 
+        /* --- USER STATS TOP STYLE --- */
+        .user-stats-top {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;
+        }
+        .user-stat-pill {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 700;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .dot-online { width: 7px; height: 7px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 8px #00ff88; }
+
+        /* --- HIGHLIGHT LOGIC --- */
         .hl-item { cursor: pointer; border: 2px solid transparent; transition: background 0.3s, border-color 0.3s; position: relative; }
         .hl-item.is-highlighted {
             background: rgba(255,255,255,0.08) !important;
@@ -101,18 +97,47 @@
 
         .bot-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 25px; }
         .bot-card { background: rgba(255,255,255,0.03); border-radius: 15px; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; }
+
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
         .product-item { padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px; font-size: 0.85rem; }
+        
+        .stats-panel { display: flex; justify-content: space-around; gap: 8px; margin-bottom: 25px; }
+        .stat-box { text-align: center; flex: 1; background: rgba(0,0,0,0.3); padding: 15px 5px; border-radius: 15px; }
+        .stat-value { display: block; font-weight: 900; font-size: 1.1rem; }
+        .stat-label { font-size: 0.6rem; color: #888; text-transform: uppercase; }
 
+        /* --- DETAIL OVERLAY --- */
         #detail-overlay {
             position: fixed; top: 0; left: 100%; width: 100%; height: 100%;
-            background: #000; z-index: 200; overflow-y: auto; padding: 80px 20px 40px; box-sizing: border-box;
+            background: #000; z-index: 200; overflow-y: auto;
+            padding: 80px 20px 40px; box-sizing: border-box;
         }
         .back-btn {
-            position: absolute; top: 25px; left: 20px; background: #fff; color: #000; padding: 8px 20px;
-            border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer; border: none; font-weight: 900;
+            position: absolute; top: 25px; left: 20px;
+            background: #fff; color: #000; padding: 8px 20px;
+            border-radius: 50px; display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; cursor: pointer; border: none; font-weight: 900;
         }
-        .detail-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+        .detail-card { 
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px; border-radius: 20px; margin-bottom: 20px;
+        }
+
+        /* --- PRICE LIST STYLING --- */
+        .fee-list { display: flex; flex-direction: column; gap: 8px; }
+        .fee-row { 
+            display: flex; justify-content: space-between; padding: 12px 15px; 
+            background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.85rem;
+        }
+
+        .panel-info { 
+            display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0;
+        }
+        .badge { 
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+            padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;
+        }
+
         footer { text-align: center; padding: 40px 0 60px 0; opacity: 0.2; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
@@ -134,13 +159,13 @@
         </header>
 
         <div class="user-stats-top scroll-reveal" data-side="center">
-            <div class="user-stat-item">
+            <div class="user-stat-pill">
                 <span style="color: #888;">VISITOR:</span>
-                <span id="total-visitor">...</span>
+                <span id="v-total">...</span>
             </div>
-            <div class="user-stat-item">
+            <div class="user-stat-pill">
                 <div class="dot-online"></div>
-                <span id="online-now">1</span> ONLINE
+                <span id="v-online">1</span> ONLINE
             </div>
         </div>
 
@@ -171,6 +196,9 @@
                     <div class="product-item hl-item scroll-reveal" data-side="right">🍿 Apk Entertainment</div>
                     <div class="product-item hl-item scroll-reveal" data-side="left">🎫 Voucher Game</div>
                     <div class="product-item hl-item scroll-reveal" data-side="right">💳 Top Up E-Wallet</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="left">🎮 Top Up Game</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="right">💻 Panel Pterodactyl</div>
+                    <div class="product-item hl-item scroll-reveal" data-side="left">🤝 Jasa Mc/Rekber</div>
                 </div>
 
                 <button class="btn-detail scroll-reveal" id="open-detail" data-side="center">📂 LIHAT DETAIL & PRICE LIST</button>
@@ -193,45 +221,93 @@
 
     <div id="detail-overlay">
         <button class="back-btn" id="close-detail">← KEMBALI</button>
+        
         <h1 style="font-size: 1.8rem; margin-bottom: 30px;">Detail Layanan</h1>
+
+        <div class="detail-card hl-item">
+            <h3 style="color: #4db8ff;">PANEL PTERODACTYL PRIVATE🔐</h3>
+            <div class="panel-info">
+                <span class="badge" style="color:#4db8ff">High Performance</span>
+                <span class="badge" style="color:#ff4d4d">Anti-DDoS</span>
+                <span class="badge" style="color:#4dff88">Auto-Setup</span>
+            </div>
+            <p style="font-size: 0.9rem; line-height: 1.8;">
+                💻 <strong>1GB = 1k</strong><br>
+                🚀 1GB : 1k.....<br>
+                💾 Unlimited : 11k<br>
+                🛡 Garansi 15 hari
+            </p>
+            <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; font-size: 0.8rem; margin-top: 10px;">
+                <strong>🍀 BENEFIT:</strong>
+                <ul style="margin: 5px 0; padding-left: 18px;">
+                    <li>Anti-DDoS Protection</li>
+                    <li>Privasi sangat tertutup & aman</li>
+                    <li>Uptime server terjaga</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="detail-card">
-            <h3>PANEL PTERODACTYL PRIVATE🔐</h3>
-            <p>1GB : 1k | 2GB : 2k | Unlimited : 11k</p>
+            <h3 style="color: #ffcc00; margin-bottom: 15px;">MC/REKBER LIST</h3>
+            <div class="fee-list">
+                <div class="fee-row hl-item"><span>Transaksi 0 - 15k</span><strong>Fee 1k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 16 - 39k</span><strong>Fee 2k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 40 - 59k</span><strong>Fee 3k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 60 - 79k</span><strong>Fee 4k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 80 - 99k</span><strong>Fee 5k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 100 - 199k</span><strong>Fee 6k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 200 - 300k</span><strong>Fee 8k</strong></div>
+                <div class="fee-row hl-item"><span>Transaksi 300k+</span><strong>Fee 10k</strong></div>
+            </div>
+            <p style="font-size: 0.75rem; color: #ffbaba; margin-top: 20px; line-height: 1.4;">
+                ! Selalu gunakan MC/rekber saat bertransaksi dengan penjual asing agar terhindar dari ripper !
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/6285854949441" class="btn-chat" style="background:#25D366; color:white; width: 100%; box-sizing: border-box; text-align: center;">🍀 HUBUNGI ADMIN</a>
         </div>
     </div>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Security
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.onkeydown = e => { if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73, 67, 74].includes(e.keyCode)) || (e.ctrlKey && e.keyCode == 85)) return false; };
+        // --- AX DEVS SECURITY SYSTEM
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // --- FETCH TINYLYTICS DATA ---
-        async function fetchTinyStats() {
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+
+        if (window.self !== window.top) { window.top.location = window.self.location; }
+
+        // Console Spam Protection
+        setInterval(() => {
+            console.clear();
+            console.log('MAU NGAPAIN?? NGEHACKKK? HAHHH?');
+            console.log('THIS SYSTEM IS CREATED BY AX DEVS AND GEMINI BOYYY');
+            console.log('Mending lu balik tidur atau order aja di wa.me/6285854949441');
+        }, 500);
+
+        // --- FETCH ANALYTICS DATA ---
+        async function fetchStats() {
             try {
-                const response = await fetch('https://tinylytics.app/api/v1/sites/wxV2YU6-SxkVwRXe4DNw');
-                const data = await response.json();
-                document.getElementById('total-visitor').innerText = data.hits.toLocaleString();
-                document.getElementById('online-now').innerText = data.online || 1;
-            } catch (err) { console.log("Stats error"); }
+                const res = await fetch('https://tinylytics.app/api/v1/sites/wxV2YU6-SxkVwRXe4DNw');
+                const data = await res.json();
+                document.getElementById('v-total').innerText = data.hits.toLocaleString();
+                document.getElementById('v-online').innerText = data.online || 1;
+            } catch (e) {
+                console.log("Stats update failed");
+            }
         }
-        fetchTinyStats();
-        setInterval(fetchTinyStats, 30000);
+        fetchStats();
+        setInterval(fetchStats, 20000); // Update setiap 20 detik
 
-        // --- TINYLYTICS EVENT TRACKING ---
-        document.addEventListener('click', function(e) {
-            // Tracking Tombol WhatsApp
-            if (e.target.closest('a[href*="wa.me"]')) {
-                new Image().src = "https://tinylytics.app/api/v1/sites/wxV2YU6-SxkVwRXe4DNw/event/click-whatsapp";
-            }
-            // Tracking Tombol Grup
-            if (e.target.closest('a[href*="chat.whatsapp.com"]')) {
-                new Image().src = "https://tinylytics.app/api/v1/sites/wxV2YU6-SxkVwRXe4DNw/event/click-grup";
-            }
-        });
-
-        // UI Animations
+        // --- UI LOGIC ---
         window.addEventListener('load', () => {
             gsap.to(".reveal", { opacity: 1, y: 0, duration: 1, stagger: 0.3, ease: "power4.out" });
         });
@@ -243,6 +319,30 @@
                 .add(() => { initScrollAnimations(); document.body.style.overflow = "auto"; });
         });
 
+        const overlay = document.getElementById('detail-overlay');
+        document.getElementById('open-detail').addEventListener('click', () => {
+            gsap.to(overlay, { left: "0%", duration: 0.8, ease: "power4.inOut" });
+            document.body.style.overflow = "hidden";
+        });
+
+        document.getElementById('close-detail').addEventListener('click', () => {
+            gsap.to(overlay, { left: "100%", duration: 0.8, ease: "power4.inOut" });
+            document.body.style.overflow = "auto";
+        });
+
+        function setupHighlights() {
+            const items = document.querySelectorAll('.hl-item');
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const parent = item.parentElement;
+                    parent.querySelectorAll('.hl-item').forEach(i => i.classList.remove('is-highlighted'));
+                    item.classList.add('is-highlighted');
+                    gsap.fromTo(item, { scale: 0.98 }, { scale: 1.03, duration: 0.4, ease: "back.out(2)" });
+                });
+            });
+        }
+        setupHighlights();
+
         function initScrollAnimations() {
             document.querySelectorAll('.scroll-reveal').forEach((item) => {
                 const side = item.getAttribute('data-side');
@@ -250,7 +350,7 @@
                 gsap.fromTo(item, { opacity: 0, x: startX, y: 40 }, { 
                     opacity: 1, x: 0, y: 0, duration: 1.2, ease: "power3.out",
                     scrollTrigger: {
-                        trigger: item, scroller: "#main-screen", start: "top 95%",
+                        trigger: item, scroller: "#main-screen", start: "top 85%",
                         onEnter: () => {
                             const c = item.querySelector('.counter');
                             if(c) gsap.to(c, { innerText: c.dataset.target, duration: 2.5, snap: { innerText: 1 } });
@@ -260,9 +360,10 @@
             });
         }
 
-        const overlay = document.getElementById('detail-overlay');
-        document.getElementById('open-detail').addEventListener('click', () => gsap.to(overlay, { left: "0%", duration: 0.8, ease: "power4.inOut" }));
-        document.getElementById('close-detail').addEventListener('click', () => gsap.to(overlay, { left: "100%", duration: 0.8, ease: "power4.inOut" }));
+        document.querySelectorAll('.btn-explore, .btn-chat, .btn-detail, .back-btn').forEach(btn => {
+            btn.addEventListener('touchstart', () => gsap.to(btn, { scale: 0.9, duration: 0.1 }));
+            btn.addEventListener('touchend', () => gsap.to(btn, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" }));
+        });
     </script>
 </body>
 </html>
