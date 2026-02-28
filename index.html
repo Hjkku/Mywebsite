@@ -13,43 +13,33 @@
     <link rel="manifest" href="data:application/manifest+json,{'display':'standalone','background_color':'#000000','theme_color':'#000000'}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&amp;display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Maksa browser pake dark mode sistem */
             color-scheme: dark;
         }
-
-        /* 3. BODY & HTML FIX */
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: "Poppins", sans-serif;
             background-color: #000000 !important;
-            /* Pastiin warna itemnya tumpah sampe ke bawah navigasi bar HP */
             min-height: -webkit-fill-available;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             color: #f0f0f0;
         }
-
-        /* Nav & Button Clean Up */
         button, a, .btn-explore, .btn-chat {
             -webkit-tap-highlight-color: transparent;
             outline: none;
             user-select: none;
         }
-
         @keyframes grayMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* --- SCREEN 1: WELCOME --- */
         #welcome-screen {
             position: fixed;
-            /* Pakai inset 0 dan padding bottom safe area */
             top: 0; left: 0; right: 0; bottom: 0;
             display: flex;
             justify-content: center; align-items: center;
@@ -58,7 +48,6 @@
             background-size: 400% 400%;
             animation: grayMove 10s ease infinite;
             z-index: 100;
-            /* Penting: narik warna background sampe bawah tombol navigasi */
             padding-bottom: env(safe-area-inset-bottom);
         }
         .reveal { opacity: 0; transform: translateY(30px); }
@@ -67,7 +56,6 @@
         .btn-explore { display: inline-block; background-color: #fff; color: #000; padding: 18px 55px; font-size: 1.1rem; font-weight: 900; border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
         .welcome-footer { margin-top: 60px; color: #444; font-size: 0.8rem; opacity: 0; }
 
-        /* --- SCREEN 2: MAIN --- */
         #main-screen {
             position: absolute;
             top: 100%; left: 0; width: 100%; height: 100vh;
@@ -77,11 +65,9 @@
             z-index: 50;
             overflow-y: auto;
             scrollbar-width: none;
-            /* Tarik konten ke area bawah navigasi */
             padding-bottom: env(safe-area-inset-bottom);
         }
         #main-screen::-webkit-scrollbar { display: none; }
-
         header { 
             background: rgba(0, 0, 0, 0.8); 
             backdrop-filter: blur(20px);
@@ -90,10 +76,8 @@
             text-align: center; 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
         }
-
         main { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
         .main-reveal { opacity: 0; transform: translateY(30px); }
-        
         section { 
             margin-bottom: 40px; 
             background: rgba(255, 255, 255, 0.02); 
@@ -104,14 +88,12 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        
         h2 { font-size: 1.8rem; border-left: 4px solid #fff; padding-left: 15px; margin-bottom: 20px; }
         .btn-chat { background: #fff; color: #000; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: 800; display: inline-block; }
         footer { text-align: center; padding: 40px 0 60px 0; opacity: 0.2; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
-
     <div id="welcome-screen">
         <div class="welcome-content">
             <h1 class="reveal">WELCOME TO<br>AXSTORE</h1>
@@ -122,7 +104,6 @@
             <div class="welcome-footer" id="w-footer">© 2026 AXDEVS — AXSTORE.MY.ID</div>
         </div>
     </div>
-
     <div id="main-screen">
         <header>
             <h1 style="font-size: 2.8rem; margin:0; letter-spacing: -2px;">AX DEVS</h1>
@@ -140,7 +121,6 @@
         </main>
         <footer>AX DEVS ECOSYSTEM</footer>
     </div>
-
     <script>
         const exploreBtn = document.getElementById('explore-btn');
         window.addEventListener('load', () => {
