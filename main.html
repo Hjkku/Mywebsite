@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Saya - Tema Gelap Menawan</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Hitam agak terang */
+            color: #f0f0f0; /* Teks abu-abu terang */
+            opacity: 0; /* Awalnya transparan untuk animasi fade-in */
+            animation: fadeIn 1s ease-in-out forwards; /* Animasi fade-in */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        header {
+            background-color: #262626; /* Sedikit lebih terang dari body */
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            background-color: #333333;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #444444;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            border-bottom: 2px solid #555555;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .about-me p {
+            line-height: 1.6;
+        }
+
+        .group-chat-link {
+            display: inline-block;
+            background-color: #4CAF50; /* Warna hijau untuk tombol chat */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .group-chat-link:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #262626;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Selamat Datang di Website Saya</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about-me">Tentang Saya</a></li>
+            <li><a href="#group-chat">Grup Chat</a></li>
+            </ul>
+    </nav>
+
+    <main>
+        <section id="about-me" class="about-me">
+            <h2>Tentang Saya</h2>
+            <p>Halo! Saya Rangga, seorang Developer kecil yang sedang belajar bahasa pemrograman. Di sini Anda bisa menemukan informasi tentang saya, proyek saya, dan cara menghubungi saya.</p>
+            </section>
+
+        <section id="group-chat">
+            <h2>Grup Chat</h2>
+            <p>Bergabunglah dengan grup chat kami untuk berdiskusi tentang bot WhatsApp, store, dan masih banyak lagi.</p>
+            <a href="https://chat.whatsapp.com/H6Qe6Mw8ZurKeFMgl06RHr?mode=hqctcla" class="group-chat-link" target="_blank">Gabung Grup Chat</a>
+        </section>
+
+        </main>
+
+    <footer>
+        <p>&copy; 2026 AX DEVS. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            document.body.style.opacity = 1; 
+        });
+    </script>
+</body>
+</html>
